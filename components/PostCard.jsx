@@ -4,10 +4,26 @@ import moment from 'moment';
 import Link from 'next/link';
 
 import { grpahCMSImageLoader } from '../util';
+import { motion } from 'framer-motion';
 
+
+const containerVariants = {
+    hidden: {
+        opacity: 0,
+    },
+    visible: {
+        opacity: 1,
+        transition: { delay: 1.8, duration: 1.5 }
+    },
+    exit: {
+        x: "-100vh",
+        transition: { ease: 'easeInOut' }
+    }
+};
 const PostCard = ({ post }) => {
     {
-        return (<div className="bg-white shadow-lg rounded-lg p-0 lg:p-8 pb-12 mb-8">
+        return (<motion.div
+            className="bg-white shadow-lg rounded-lg p-0 lg:p-8 pb-12 mb-8 overflow-x-hidden">
             <div className="relative shadow-md inline-block w-full h-60 lg:h-80 mb-6">
                 <Image
                     unoptimized
@@ -47,10 +63,13 @@ const PostCard = ({ post }) => {
             </p>
             <div className="text-center">
                 <Link href={`/post/${post.slug}`}>
-                    <span className="transition duration-500 ease transform hover:-translate-y-1 inline-block bg-blue-600 text-lg font-medium rounded-full text-white px-8 py-3 cursor-pointer">Continue Reading</span>
+                    <motion.span
+                        whileHover={{ scale: 1.3 }}
+                        transition={{ type: 'spring', stiffness: 300 }}
+                        className="border-2 border-blue-600 inline-block text-blue-600 text-lg font-bold rounded-full bg-white px-8 py-3 cursor-pointer">Continue Reading</motion.span>
                 </Link>
             </div>
-        </div>)
+        </motion.div>)
     }
 }
     ;
